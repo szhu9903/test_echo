@@ -24,16 +24,15 @@ jobs:
           cd blog_admin
           npm install
           npm run build
-          echo */
-          cd ..
-          echo */
         env:
           CI: false
       # Deploy
       - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.2.11
+        uses: easingthemes/ssh-deploy@v2.2.7
         env:
           SSH_PRIVATE_KEY: ${{ secrets.TENGXUN_TOKEN }}
           ARGS: "-avzr --delete"
+          SOURCE: "blog_admin/build"
           REMOTE_HOST: ${{ secrets.TENGXUN_HOST }}
-          REMOTE_USER: "root"
+          REMOTE_USER: "ubuntu"
+          TARGET: "/home/root/test"
