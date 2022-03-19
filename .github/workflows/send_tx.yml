@@ -24,6 +24,9 @@ jobs:
           cd blog_admin
           npm install
           npm run build
+          echo */
+          cd ..
+          echo */
         env:
           CI: false
       # Deploy
@@ -32,7 +35,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.TENGXUN_TOKEN }}
           ARGS: "-avzr --delete"
-          SOURCE: "../"
+          SOURCE: "blog_admin/build/"
           REMOTE_HOST: ${{ secrets.TENGXUN_HOST }}
           REMOTE_USER: "root"
           TARGET: "/home/root/test/"
