@@ -1,0 +1,38 @@
+name: deploy blog to txy
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'blog_admin/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出
+      - name: Checkout
+        uses: actions/checkout@master
+      # node:14
+      - name: use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      # npm install
+      - name: npm install
+        run: |
+          cd blog_admin
+          npm install
+          npm run build
+        env:
+          CI: true
+      # Deploy
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.TENGXUN_TOKEN }}
+          ARGS: "-avzr --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.TENGXUN_HOST }}
+          REMOTE_USER: "root"
+          TARGET: "/home/root/test"
