@@ -34,5 +34,5 @@ jobs:
           ARGS: "-avzr --delete"
           SOURCE: "blog_admin/build"
           REMOTE_HOST: ${{ secrets.TENGXUN_HOST }}
-          REMOTE_USER: "ubuntu"
+          REMOTE_USER: "root"
           TARGET: "/home/root/test"
