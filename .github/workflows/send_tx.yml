@@ -32,7 +32,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.TENGXUN_TOKEN }}
           ARGS: "-avzr --delete"
-          SOURCE: "blog_admin/build/"
+          SOURCE: "*"
           REMOTE_HOST: ${{ secrets.TENGXUN_HOST }}
           REMOTE_USER: "root"
           TARGET: "/home/root/test"
